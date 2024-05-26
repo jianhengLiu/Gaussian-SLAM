@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     setup_seed(config["seed"])
     gslam = GaussianSLAM(config)
-    gslam.run()
+    # gslam.run()
 
     evaluator = Evaluator(gslam.output_path, gslam.output_path / "config.yaml")
     evaluator.run()

@@ -131,12 +131,15 @@ class GaussianSLAM(object):
 
         for frame_id in range(len(self.dataset)):
 
-            if frame_id in [0, 1]:
-                estimated_c2w = self.dataset[frame_id][-1]
-            else:
-                estimated_c2w = self.tracker.track(
-                    frame_id, gaussian_model,
-                    torch2np(self.estimated_c2ws[torch.tensor([0, frame_id - 2, frame_id - 1])]))
+            # only mapping
+            estimated_c2w = self.dataset[frame_id][-1]
+            # slam
+            # if frame_id in [0, 1]:
+            #     estimated_c2w = self.dataset[frame_id][-1]
+            # else:
+            #     estimated_c2w = self.tracker.track(
+            #         frame_id, gaussian_model,
+            #         torch2np(self.estimated_c2ws[torch.tensor([0, frame_id - 2, frame_id - 1])]))
             self.estimated_c2ws[frame_id] = np2torch(estimated_c2w)
 
             # Reinitialize gaussian model for new segment
